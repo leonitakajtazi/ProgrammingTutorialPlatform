@@ -29,9 +29,10 @@ export default function ProgressScreen() {
             data={Object.entries(progress.scores)}
             keyExtractor={([quizId]) => quizId}
             renderItem={({ item: [quizId, score] }) => (
-              <Text style={styles.item}>
-                📝 {quizId}: {score} points
-              </Text>
+              <View style={styles.quizScoreCard}>
+                <Text style={styles.quizTitle}>Quiz: {quizId}</Text>
+                <Text style={styles.quizScore}>Score: {score} points</Text>
+              </View>
             )}
           />
         ) : (
@@ -46,28 +47,66 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#f7f7f7', // Background color for a modern look
   },
   header: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: 'bold',
+    color: '#2c3e50', // Dark text color for a clean look
     marginBottom: 20,
+    textAlign: 'center',
   },
   section: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
     marginBottom: 25,
+    padding: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5, // Adds shadow effect on Android
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '600',
     marginBottom: 10,
+    color: '#34495e', // Slightly lighter text for section titles
   },
   item: {
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 8,
+    color: '#2c3e50',
     paddingLeft: 10,
+    borderLeftWidth: 3,
+    borderLeftColor: '#3498db', // Blue accent on the left side
+  },
+  quizScoreCard: {
+    backgroundColor: '#ecf0f1',
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+  },
+  quizTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#2c3e50',
+  },
+  quizScore: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#e67e22', // Orange for the score to make it stand out
+    marginTop: 5,
   },
   noData: {
     fontSize: 16,
     fontStyle: 'italic',
-    color: '#999',
+    color: '#7f8c8d', // Light grey for "no data" message
+    textAlign: 'center', // Centers the text
   },
 });

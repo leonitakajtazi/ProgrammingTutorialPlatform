@@ -1,27 +1,47 @@
-// /src/screens/ExerciseScreen.js
-
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { allExercises } from '../data/exercises'; // Make sure this import is correct
 
-export default function ExerciseScreen({ route }) {
-  // Ushtrimi vjen si parametër nga navigimi
-  const { exercise } = route.params;
+export default function ExerciseScreen({ route, navigation }) {
+  const { exercise, exercisesList } = route.params;
 
-  // Kod i futur nga përdoruesi
   const [code, setCode] = useState('');
-  // Mesazh rezultati
   const [result, setResult] = useState('');
 
+  // Reset code and result when the exercise changes
+  useEffect(() => {
+    setCode('');
+    setResult('');
+  }, [exercise]);
+
   const checkSolution = () => {
-    // Këtu thjesht bëjmë një krahasim bazë të tekstit (string) pastrim 
-    // (në një app real mund të bësh parsing ose eval me kujdes)
-    const cleanCode = code.replace(/\s/g, '');
-    const cleanSolution = exercise.solution.replace(/\s/g, '');
+    const cleanCode = code.replace(/\s/g, ''); // Remove spaces for comparison
+    const cleanSolution = exercise.solution.replace(/\s/g, ''); // Remove spaces from solution
 
     if (cleanCode === cleanSolution) {
       setResult('Correct! 🎉');
+
+      // Get the index of the current exercise from allExercises
+      const currentIndex = allExercises.findIndex((ex) => ex.id === exercise.id);
+
+      if (currentIndex === -1) {
+        setResult('Error: Current exercise not found!');
+        return; // Exit if exercise is not found
+      }
+
+      // Get the next exercise, if there is one
+      const nextExercise = allExercises[currentIndex + 1];
+
+      if (nextExercise) {
+        navigation.navigate('ExerciseScreen', {
+          exercise: nextExercise,
+          exercisesList: exercisesList, // Pass the list of exercises
+        });
+      } else {
+        setResult('You have completed all exercises! 🎉');
+      }
     } else {
-      setResult('Try again! 💪');
+      setResult('Incorrect solution. Please try again!');
     }
   };
 
@@ -45,7 +65,7 @@ export default function ExerciseScreen({ route }) {
         <Text style={styles.buttonText}>Check Solution</Text>
       </TouchableOpacity>
 
-      {result ? <Text style={styles.result}>{result}</Text> : null}
+      {result && <Text style={styles.result}>{result}</Text>}
     </View>
   );
 }
@@ -65,7 +85,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   codeInput: {
-    flex: 1,
+    height: 120,
     borderColor: '#ccc',
     borderWidth: 1,
     borderRadius: 8,
@@ -75,7 +95,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#4CAF50',
-    padding: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 8,
     alignItems: 'center',
   },

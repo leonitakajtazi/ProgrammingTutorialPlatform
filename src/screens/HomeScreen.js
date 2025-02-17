@@ -1,23 +1,24 @@
+// HomeScreen.js
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 const featuredContent = [
   { id: '1', title: 'JavaScript Basics', icon: 'logo-javascript' },
-  { id: '2', title: 'React Native Fundamentals', icon: 'logo-react' },
-  { id: '3', title: 'State Management', icon: 'settings' },
-  { id: '4', title: 'Async Storage in React Native', icon: 'cloud-outline' },
-  { id: '5', title: 'Using APIs in React Native', icon: 'link-outline' },
+  { id: '2', title: 'HTML', icon: 'logo-html5' },
+  { id: '3', title: 'CSS', icon: 'logo-css3' },
+  { id: '4', title: 'React Native', icon: 'logo-react' },
 ];
+
 
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>💻 Code Your Success!</Text>
       <Text style={styles.subheader}>
-        Unlock your potential with interactive tutorials and hands-on exercises.
+        Unlock your potential with hands-on tutorials.
       </Text>
 
-      <Text style={styles.sectionTitle}>🔥 Featured Tutorials:</Text>
+      <Text style={styles.sectionTitle}>🔥 Learning Materials</Text>
 
       <FlatList
         data={featuredContent}
@@ -25,7 +26,14 @@ export default function HomeScreen({ navigation }) {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.item}
-            onPress={() => navigation.navigate('TutorialDetail', { title: item.title })}
+            onPress={() => {
+              if (item.title === 'JavaScript Basics') {
+      navigation.navigate('Tutorials', { screen: 'LearningMaterials' });
+    
+    } else {
+      navigation.navigate('Tutorials', { screen: 'LearningMaterials' });
+    }
+            }}
           >
             <Ionicons name={item.icon} size={30} color="#4682B4" style={styles.icon} />
             <View style={styles.textContainer}>
@@ -46,7 +54,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   header: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 10,

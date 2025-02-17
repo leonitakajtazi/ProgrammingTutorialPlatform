@@ -1,5 +1,3 @@
-// /src/screens/QuizScreen.js
-
 import { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useProgress } from '../components/ProgressContext';
@@ -81,5 +79,74 @@ export default function QuizScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  // ... si më parë ...
+  container: {
+    flex: 1,
+    backgroundColor: '#F9F9F9',  // Ndryshim i sfondit për më shumë ngjyrë
+    paddingTop: 40,
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#2C3E50',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  questionContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  questionNumber: {
+    fontSize: 18,
+    color: '#7F8C8D',
+    marginBottom: 10,
+  },
+  questionText: {
+    fontSize: 20,
+    fontWeight: '500',
+    color: '#34495E',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  optionButton: {
+    backgroundColor: '#4682B4',
+    paddingVertical: 15,
+    paddingHorizontal: 25,
+    marginVertical: 8,
+    borderRadius: 8,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3, // Hije për efektin e butë të butonave
+  },
+  optionText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#FFF',
+  },
+  results: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+  },
+  score: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#27AE60',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#E74C3C',
+    paddingVertical: 12,
+    paddingHorizontal: 30,
+    borderRadius: 8,
+    elevation: 3,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#FFF',
+  },
 });
