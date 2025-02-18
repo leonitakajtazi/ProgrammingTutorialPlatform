@@ -4,15 +4,14 @@ import { WebView } from 'react-native-webview';
 
 // Importet e quiz-eve dhe ushtrimeve
 import { javascriptQuizzes } from '../data/quizzes';
-import { javascriptExercises } from '../data/exercises';
-
+import { exercises } from '../data/exercises'; 
 export default function TutorialDetailScreen({ route, navigation }) {
   const { tutorial, quizId, exerciseId } = route.params;
 
   // Merr quiz dhe ushtrimet përkatëse nga ID-të
   const quiz = javascriptQuizzes.find(q => q.id === quizId);
-  const exercise = javascriptExercises.find(e => e.id === exerciseId);
-
+  const exercise = exercises.find(e => e.id === exerciseId);
+  
   // Përmbajtja HTML si shembull
   const htmlContent = tutorial?.category === 'Web Development' ? `
   <html>
@@ -147,8 +146,7 @@ function example() {
 
         <TouchableOpacity
           style={[styles.button, styles.exerciseButton]}
-          onPress={() => navigation.navigate('Exercise', { exercise: exercise })}
-          
+          onPress={() => navigation.navigate('Exercise', { exercise: exercise, exercisesList: exercises })}          
         >
         
           <Text style={styles.buttonText}>Try Exercise</Text>

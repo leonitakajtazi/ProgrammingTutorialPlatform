@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { allExercises } from '../data/exercises'; // Make sure this import is correct
 
 export default function ExerciseScreen({ route, navigation }) {
   const { exercise, exercisesList } = route.params;
@@ -8,34 +7,42 @@ export default function ExerciseScreen({ route, navigation }) {
   const [code, setCode] = useState('');
   const [result, setResult] = useState('');
 
-  // Reset code and result when the exercise changes
+  // Filtrimi i ushtrimeve përkatëse sipas kategorisë
+  const filteredExercises = exercisesList.filter((ex) => ex.category === exercise.category);
+
+  // Reset kodin dhe rezultatin kur ushtrimi ndryshon
   useEffect(() => {
     setCode('');
     setResult('');
   }, [exercise]);
 
   const checkSolution = () => {
-    const cleanCode = code.replace(/\s/g, ''); // Remove spaces for comparison
-    const cleanSolution = exercise.solution.replace(/\s/g, ''); // Remove spaces from solution
-
+    const cleanCode = code.replace(/\s/g, ''); // Hiq hapësirat për krahasim
+    const cleanSolution = exercise.solution.replace(/\s/g, ''); // Hiq hapësirat nga zgjidhja
+  
+    console.log('Current Exercise ID:', exercise.id); // Log ID i ushtrimit aktual
+    console.log('Filtered Exercises:', filteredExercises); // Log lista e ushtrimeve të filtruar
+  
     if (cleanCode === cleanSolution) {
       setResult('Correct! 🎉');
-
-      // Get the index of the current exercise from allExercises
-      const currentIndex = allExercises.findIndex((ex) => ex.id === exercise.id);
-
+  
+      // Gjej indeksin e ushtrimit aktual në listën e filtruar
+      const currentIndex = filteredExercises.findIndex((ex) => ex.id === exercise.id);
+      console.log('Current Exercise Index:', currentIndex); // Log indeksin që po kërkoni
+  
       if (currentIndex === -1) {
         setResult('Error: Current exercise not found!');
-        return; // Exit if exercise is not found
+        return;
       }
-
-      // Get the next exercise, if there is one
-      const nextExercise = allExercises[currentIndex + 1];
-
+  
+      // Gjej ushtrimin e radhës në listën e filtruar
+      const nextExercise = filteredExercises[currentIndex + 1];
+  
       if (nextExercise) {
-        navigation.navigate('ExerciseScreen', {
+        // Navigo në ushtrimin e radhës
+        navigation.navigate('Exercise', {
           exercise: nextExercise,
-          exercisesList: exercisesList, // Pass the list of exercises
+          exercisesList: exercisesList, // Dërgo të gjithë listën e ushtrimeve
         });
       } else {
         setResult('You have completed all exercises! 🎉');
@@ -44,7 +51,7 @@ export default function ExerciseScreen({ route, navigation }) {
       setResult('Incorrect solution. Please try again!');
     }
   };
-
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{exercise.title}</Text>

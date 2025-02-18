@@ -5,9 +5,9 @@ import { Ionicons } from '@expo/vector-icons';
 // Lista e kurseve me kategori dhe ikona përkatëse
 const tutorials = [
   { id: 'js1', title: 'JavaScript Basics', category: 'JavaScript', icon: 'logo-javascript', quizId: 'js1', exerciseId: 'ex1' },
-  { id: 'wd1', title: 'HTML Basics', category: 'HTML', icon: 'logo-html5', quizId: 'wd1', exerciseId: 'ex1' },
-  { id: 'wd2', title: 'CSS Styling', category: 'CSS', icon: 'logo-css3', quizId: 'wd2', exerciseId: 'ex2' },
-  { id: 'rn1', title: 'React Native Basics', category: 'React Native', icon: 'logo-react', quizId: 'rn1', exerciseId: 'ex1' },
+  { id: 'wd1', title: 'HTML Basics', category: 'HTML', icon: 'logo-html5', quizId: 'wd1', exerciseId: 'ex5' },
+  { id: 'wd2', title: 'CSS Styling', category: 'CSS', icon: 'logo-css3', quizId: 'wd2', exerciseId: 'ex8' },
+  { id: 'rn1', title: 'React Native Basics', category: 'React Native', icon: 'logo-react', quizId: 'rn1', exerciseId: 'ex12' }
 ];
 
 
