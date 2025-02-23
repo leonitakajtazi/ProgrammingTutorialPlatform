@@ -5,6 +5,7 @@ import { WebView } from 'react-native-webview';
 // Importet e quiz-eve dhe ushtrimeve
 import { javascriptQuizzes } from '../data/quizzes';
 import { exercises } from '../data/exercises'; 
+
 export default function TutorialDetailScreen({ route, navigation }) {
   const { tutorial, quizId, exerciseId } = route.params;
 
@@ -123,32 +124,37 @@ function example() {
   </html>
 `;
 
-
   return (
+    // ScrollView për të lejuar rrokullisjen nëse përmbajtja është më e gjatë se ekrani
     <ScrollView style={styles.container}>
+      {/* Shfaq titullin e tutorialit, nëse është i disponueshëm */}
       <Text style={styles.title}>{tutorial?.title}</Text>
-
+      {/* Shfaq përshkrimin e tutorialit, nëse është i disponueshëm */}
       <Text style={styles.description}>{tutorial?.description}</Text>
 
+      {/* WebView për të ngarkuar përmbajtjen HTML të tutorialit */}
       <WebView
         originWhitelist={['*']}
         source={{ html: htmlContent }}
         style={styles.webview}
       />
 
+      {/* Kontejneri për butonat e navigimit (Kuiz & Ushtrime) */}
       <View style={styles.buttonsContainer}>
+
+        {/* Butoni për të kaluar në ekranin e kuizit */}
         <TouchableOpacity
           style={[styles.button, styles.quizButton]}
-          onPress={() => navigation.navigate('Quiz', { quiz: quiz })}
+          onPress={() => navigation.navigate('Quiz', { quiz: quiz })}  // Navigimi në ekranin e kuizit me të dhënat përkatëse
         >
           <Text style={styles.buttonText}>Take Quiz</Text>
         </TouchableOpacity>
 
+        {/* Butoni për të kaluar në ekranin e ushtrimeve */}
         <TouchableOpacity
           style={[styles.button, styles.exerciseButton]}
           onPress={() => navigation.navigate('Exercise', { exercise: exercise, exercisesList: exercises })}          
         >
-        
           <Text style={styles.buttonText}>Try Exercise</Text>
         </TouchableOpacity>
       </View>

@@ -1,13 +1,13 @@
 export const javascriptQuizzes = [
     {
-      id: 'js1',
-      title: 'JavaScript Basics',
-      questions: [
+      id: 'js1',    // ID e quiz-it, një identifikues unik për quiz-in.
+      title: 'JavaScript Basics',    // Titulli i quiz-it.
+      questions: [     // Lista e pyetjeve që përmban ky quiz.
         {
-          question: 'How do you declare a variable in JavaScript?',
-          options: ['var x;', 'variable x;', 'v x;', 'let x;'],
-          correctAnswers: [0, 3],
-          explanation: 'In JavaScript, you can declare variables using var, let, or const.'
+          question: 'How do you declare a variable in JavaScript?',   // Pyetja e parë.
+          options: ['var x;', 'variable x;', 'v x;', 'let x;'],       // Opsionet e mundshme për përgjigjen e pyetjes.
+          correctAnswers: [0, 3],              // Indekset e opsioneve të sakta (0 është 'var x;' dhe 3 është 'let x;').
+          explanation: 'In JavaScript, you can declare variables using var, let, or const.'     // Shpjegimi për përgjigjen e saktë.
         },
         {
           question: 'Which type of scope is created with the "var" keyword?',

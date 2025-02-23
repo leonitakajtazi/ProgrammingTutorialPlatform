@@ -3,24 +3,30 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 
 export default function QuizScreen({ route, navigation }) {
+  // Marrim të dhënat e quiz-it nga parametri i route
   const { quiz } = route.params;
 
-  const { progress, saveProgress } = useProgress(); // MERR context-in
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showResults, setShowResults] = useState(false);
+  // Marrim progresin aktual të përdoruesit dhe funksionin për ta ruajtur atë
+  const { progress, saveProgress } = useProgress(); 
+  const [currentQuestion, setCurrentQuestion] = useState(0);   //për të ruajtur pyetjen aktuale
+  const [score, setScore] = useState(0);                      //për të mbajtur rezultatin e kuizit
+  const [showResults, setShowResults] = useState(false);     //për të treguar rezultatet pasi përfundon kuizi
 
+  // Funksioni që trajton përgjigjet e përdoruesit
   const handleAnswer = (index) => {
     if (!showResults) {
-      const isCorrect = quiz.questions[currentQuestion].correctAnswers.includes(index);
+      // Kontrollon nëse përgjigja është e saktë
+      const isCorrect = quiz.questions[currentQuestion].correctAnswers.includes(index);  
       if (isCorrect) setScore(score + 1);
 
+      // Nëse ka më shumë pyetje, kalon në pyetjen tjetër
       if (currentQuestion < quiz.questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
+        // Nëse është pyetja e fundit, tregon rezultatet dhe ruan progresin
         setShowResults(true);
 
-        // RUAN progresin
+        // Ruajmë progresin e përdoruesit me rezultatet e kuizit
         const newProgress = {
           ...progress,
           completedQuizzes: {
@@ -32,20 +38,24 @@ export default function QuizScreen({ route, navigation }) {
             [quiz.id]: score + (isCorrect ? 1 : 0), // ruajmë pikët për këtë quiz
           },
         };
-        saveProgress(newProgress);
+        saveProgress(newProgress); // Përdorim funksionin për të ruajtur progresin e përdoruesit
       }
     }
   };
 
   return (
     <View style={styles.container}>
+      {/* Titulli i kuizit */}
       <Text style={styles.title}>{quiz.title}</Text>
 
+      {/* Nëse kuizi ka përfunduar, shfaq rezultatet */}
       {showResults ? (
         <View style={styles.results}>
           <Text style={styles.score}>
             Score: {score}/{quiz.questions.length}
           </Text>
+
+          {/* Buton për t'u kthyer te tutorialet */}
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.goBack()}
@@ -54,15 +64,18 @@ export default function QuizScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
       ) : (
+        // Nëse kuizi është ende duke u zhvilluar, shfaq pyetjen aktuale
         <View style={styles.questionContainer}>
           <Text style={styles.questionNumber}>
             Question {currentQuestion + 1}/{quiz.questions.length}
           </Text>
 
+          {/* Teksti i pyetjes aktuale */}
           <Text style={styles.questionText}>
             {quiz.questions[currentQuestion].question}
           </Text>
 
+          {/* Opsionet e përgjigjeve si butona të klikueshëm */}
           {quiz.questions[currentQuestion].options.map((option, index) => (
             <TouchableOpacity
               key={index}

@@ -1,11 +1,12 @@
 // JavaScript Exercises
+// Lista e ushtrimeve për JavaScript
 export const javascriptExercises = [
   {
-    id: 'ex1',
-    title: 'Hello World Function',
-    description: 'Create a function that returns "Hello World!"',
-    solution: 'function hello() { return "Hello World!"; }',
-    category: 'JavaScript'
+    id: 'ex1', // Identifikues unik për ushtrimin
+    title: 'Hello World Function',  // Titulli i ushtrimit
+    description: 'Create a function that returns "Hello World!"', // Përshkrimi i ushtrimit
+    solution: 'function hello() { return "Hello World!"; }',  // Zgjidhja e propozuar
+    category: 'JavaScript' // Kategoria e ushtrimit
   },
   {
     id: 'ex2',
@@ -33,7 +34,9 @@ export const javascriptExercises = [
   }
 ];
 
-// HTML Exercises
+
+
+// Lista e ushtrimeve për HTML
 export const htmlExercises = [
   // Ushtrimet ekzistuese
   {
@@ -43,7 +46,6 @@ export const htmlExercises = [
     solution: '<!DOCTYPE html><html><head><title>Simple Page</title></head><body><h1>Welcome!</h1><p>This is a simple page.</p><img src="example.jpg" alt="Example Image"></body></html>',
     category: 'HTML'
   },
-  // Ushtrime të reja
   {
     id: 'ex6',
     title: 'Create an HTML Form',
@@ -61,9 +63,10 @@ export const htmlExercises = [
 ];
 
 
-// CSS Exercises
+
+
+// Lista e ushtrimeve për CSS
 export const cssExercises = [
-  // Ushtrimet ekzistuese
   {
     id: 'ex8',
     title: 'CSS Styling for Buttons',
@@ -78,7 +81,6 @@ export const cssExercises = [
     solution: '@media screen and (max-width: 600px) { body { font-size: 14px; } }',
     category: 'CSS'
   },
-  // Ushtrime të reja
   {
     id: 'ex10',
     title: 'Centering a Div',
@@ -95,9 +97,10 @@ export const cssExercises = [
   }
 ];
 
-// React Native Exercises
+
+
+// Lista e ushtrimeve për React Native
 export const reactNativeExercises = [
-  // Ushtrimet ekzistuese
   {
     id: 'ex12',
     title: 'Create a Simple React Native App',
@@ -112,7 +115,6 @@ export const reactNativeExercises = [
     solution: 'import React, { useState } from "react"; import { Button, Text, View } from "react-native"; const App = () => { const [isOn, setIsOn] = useState(false); return <View><Button title="Toggle" onPress={() => setIsOn(!isOn)} /><Text>{isOn ? "On" : "Off"}</Text></View>; }; export default App;',
     category: 'React Native'
   },
-  // Ushtrime të reja
   {
     id: 'ex14',
     title: 'Create a Counter App',
@@ -130,7 +132,9 @@ export const reactNativeExercises = [
 ];
 
 
-// Tutorials List (with category and icon)
+
+
+// Lista e tutorialeve me kategori dhe ikonë
 const tutorials = [
   { id: 'js1', title: 'JavaScript Basics', category: 'JavaScript', icon: 'logo-javascript', quizId: 'js1', exerciseId: 'ex1' },
   { id: 'wd1', title: 'HTML Basics', category: 'HTML', icon: 'logo-html5', quizId: 'wd1', exerciseId: 'ex5' },
@@ -138,8 +142,9 @@ const tutorials = [
   { id: 'rn1', title: 'React Native Basics', category: 'React Native', icon: 'logo-react', quizId: 'rn1', exerciseId: 'ex12' }
 ];
 
-// All Exercises
 
+
+// Lista që përmbledh të gjitha ushtrimet
 export const exercises = [
   ...javascriptExercises,
   ...htmlExercises,
