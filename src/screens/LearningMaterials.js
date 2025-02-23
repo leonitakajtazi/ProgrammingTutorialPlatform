@@ -1,21 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { CommonActions } from '@react-navigation/native';
 
-export default function JavaScript() {
-  const navigation = useNavigation();
+export default function LearningMaterials({ route,navigation }) {
   const [activeTutorial, setActiveTutorial] = useState('JavaScript'); // Menaxhon tutorialin aktiv
 
-  // Funksion për kthimin mbrapa në ekranin kryesor
-  const handleGoBack = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: 'Home' }], // Kthehet në ekranin kryesor 'Home'
-      })
-    );
-  };
+
+ 
 
   // Funksion që gjeneron listën e tutorialeve për gjuhën përkatëse
   const renderTutorials = (tutorials) => {
@@ -428,7 +418,7 @@ export default function JavaScript() {
       `,
     },
   ];
-  
+ 
 
   // Lista e kurseve të disponueshme
   const menuItems = [
@@ -443,23 +433,26 @@ export default function JavaScript() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      
-
-      <FlatList
-        horizontal
-        data={menuItems}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={[styles.menuItem, activeTutorial === item.name && styles.activeMenuItem]}
-            onPress={() => setActiveTutorial(item.name)}
-          >
-            <Text style={styles.menuText}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.name}
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.menuContainer}
-      />
+ 
+     <FlatList
+  horizontal
+  data={menuItems}
+  renderItem={({ item }) => (
+    <TouchableOpacity
+      style={[
+        styles.menuItem,
+        activeTutorial === item.name && styles.activeMenuItem
+      ]}
+      onPress={() => setActiveTutorial(item.name)}
+    >
+      <Text style={styles.menuText}>{item.name}</Text>
+    </TouchableOpacity>
+  )}
+  keyExtractor={(item) => item.name}
+  showsHorizontalScrollIndicator={false}
+  contentContainerStyle={styles.menuContainer}
+  style={styles.menuList} // Shtoni këtë stil për të kontrolluar lartësinë e menusë
+/>
 
       <Text style={styles.title}>📜 {activeTutorial} Basics</Text>
       <Text style={styles.description}>
@@ -491,21 +484,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',  // Përdor 'stretch' për të shtrirë të gjithë elementet në gjerësi të njëjtë
     width: '100%',
   },
-  backButton: {
-  backgroundColor: '#2980b9',
-  paddingVertical: 10,
-  paddingHorizontal: 20,
-  borderRadius: 5,
-  marginBottom: 20,
-  width: 'auto', // Përdorim 'auto' për të shmangur shtrirjen e butonit në gjerësi të plotë
-  alignSelf: 'center', // Për ta qendruar butonin në mes të ekranit
-},
-backButtonText: {
-  color: '#fff',
-  fontSize: 16,
-  fontWeight: 'bold',
-  textAlign: 'center',
-},
+
 
   
   title: {
@@ -551,14 +530,17 @@ backButtonText: {
     textAlign: 'left',
   },
   menuContainer: {
-    paddingVertical: 10,
-  },
+  paddingVertical: 10,
+  flexDirection: 'row', // Rregullon butonat në një rresht horizontal
+},
   menuItem: {
-    padding: 12,
-    marginHorizontal: 5,
-    borderRadius: 10,
-    backgroundColor: '#3498db',
-  },
+  paddingVertical: 12,
+  paddingHorizontal: 16, // Përdorim padding horizontal për ta bërë butonin më të gjerë sipas tekstit
+  marginHorizontal: 5,
+  borderRadius: 10,
+  backgroundColor: '#3498db',
+  alignSelf: 'flex-start', // Siguron që butonët të mos shtrihen në të gjithë gjerësinë
+},
   activeMenuItem: {
     backgroundColor: '#2980b9',
   },
@@ -579,5 +561,19 @@ backButtonText: {
     color: '#2c3e50',
     fontFamily: 'Courier New', // Përdor font monospaced për shembujt e kodit
     whiteSpace: 'pre-wrap',  // Siguron që hapsirat dhe tabulat do të ruhen
+  
+  },
+  backButton: {
+    marginLeft: 10,
+    padding: 10,
+    backgroundColor: '#3498db',
+    borderRadius: 5,
+    alignItems: 'center',
+    width:'30px',
+    justifyContent:'center',
+  },
+  backButtonText: {
+    color: '#fff',
+    fontSize: 13,
   },
 });

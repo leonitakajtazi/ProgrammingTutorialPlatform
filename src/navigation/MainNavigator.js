@@ -27,11 +27,13 @@ const TutorialStack = () => (
       },
     }}
   >
+  
     <Stack.Screen name="TutorialsScreen" component={TutorialsScreen} options={{ title: 'Tutorials' }} />
     <Stack.Screen name="TutorialDetail" component={TutorialDetailScreen} options={{ title: 'Tutorial Details' }} />
     <Stack.Screen name="Quiz" component={QuizScreen} options={{ title: 'Quiz' }} />
     <Stack.Screen name="Exercise" component={ExerciseScreen} options={{ title: 'Exercises' }} />
-    <Stack.Screen name="LearningMaterials" component={LearningMaterials} options={{ title: 'Learning Materials' }} />
+    <Stack.Screen name="LearningMaterials"   component={LearningMaterials} options={{ title: 'Learning Materials'}}  />
+
   </Stack.Navigator>
 );
 
@@ -58,6 +60,14 @@ export default function MainNavigator() {
         }}
       />
       <Tab.Screen
+    name="LearningMaterials"
+    component={LearningMaterials} // Sigurohuni që të krijoni këtë komponent
+    options={{
+      tabBarLabel: 'Learning Materials',
+      tabBarIcon: ({ color, size }) => <Ionicons name="reader-outline" size={size} color={color} />, // Ikonë për materialet e të mësuarit
+    }}
+  />
+      <Tab.Screen
         name="Tutorials"
         component={TutorialStack}
         options={{
@@ -72,7 +82,9 @@ export default function MainNavigator() {
           tabBarLabel: 'Progress',
           tabBarIcon: ({ color, size }) => <Ionicons name="bar-chart-outline" size={size} color={color} />,
         }}
+        
       />
+  
     </Tab.Navigator>
   );
 }

@@ -14,6 +14,7 @@ export function ProgressProvider({ children }) {
     completedQuizzes: {},   // Shënon quiz-et që janë përfunduar. P.sh., { "js1": true, "js2": true }
     completedTutorials: [], // Lista e tutorialeve të përfunduar. P.sh., ["Introduction to RN", "JavaScript Basics"]
     scores: {},             // Rezultatet e quiz-eve. P.sh., { "js1": 4, "js2": 3 }
+    completedExercises: {}, // Shënon ushtrimet që janë përfunduar. P.sh., { "exercise1": true, "exercise2": true }
   });
 
 

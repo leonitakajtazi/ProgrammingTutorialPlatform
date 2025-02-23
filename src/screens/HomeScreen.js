@@ -23,32 +23,28 @@ export default function HomeScreen({ navigation }) {
       {/* Seksioni i materialeve të të mësuarit */}
       <Text style={styles.sectionTitle}>🔥 Learning Materials</Text>
 
-      {/* FlatList për të shfaqur listën e materialeve të të mësuarit */}
       <FlatList
-        data={featuredContent} // Merr të dhënat nga array `featuredContent`
-        keyExtractor={(item) => item.id} // Çdo element duhet të ketë një ID unike
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.item} // Stili për çdo element të listës
-            onPress={() => {
-              if (item.title === 'JavaScript Basics') {
-                // Navigimi në ekranin 'LearningMaterials' kur shtypet një element
-                navigation.navigate('Tutorials', { screen: 'LearningMaterials' });
-              } else {
-                navigation.navigate('Tutorials', { screen: 'LearningMaterials' });
-              }
-            }}
-          >
-            {/* Ikona për secilin kurs */}
-            <Ionicons name={item.icon} size={30} color="#4682B4" style={styles.icon} />
-            <View style={styles.textContainer}>
-              {/* Teksti për titullin dhe përshkrimin e shkurtër */}
-              <Text style={styles.itemTitle}>{item.title}</Text>
-              <Text style={styles.itemSubtitle}>Tap to learn more!</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+  data={featuredContent} // Merr të dhënat nga array `featuredContent`
+  keyExtractor={(item) => item.id} // Çdo element duhet të ketë një ID unike
+  renderItem={({ item }) => (
+    <TouchableOpacity
+      style={styles.item} // Stili për çdo element të listës
+      onPress={() => {
+        // Nuk ka asnjë veprim navigimi
+        console.log('Item clicked: ', item.title); // Mund të shtoni ndonjë veprim tjetër këtu, si logim për testim
+      }}
+    >
+      {/* Ikona për secilin kurs */}
+      <Ionicons name={item.icon} size={30} color="#4682B4" style={styles.icon} />
+      <View style={styles.textContainer}>
+        {/* Teksti për titullin dhe përshkrimin e shkurtër */}
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemSubtitle}>Tap to learn more!</Text>
+      </View>
+    </TouchableOpacity>
+  )}
+/>
+
     </View>
   );
 }
