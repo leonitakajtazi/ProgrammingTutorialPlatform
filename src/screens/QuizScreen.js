@@ -2,9 +2,19 @@ import { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useProgress } from '../components/ProgressContext';
 
+
+
+
 export default function QuizScreen({ route, navigation }) {
-  // Marrim të dhënat e quiz-it nga parametri i route
-  const { quiz } = route.params;
+  
+   // Marrim të dhënat e quiz-it nga parametri i route
+   const { quiz } = route.params;
+
+   if (!quiz) {
+     // Nëse quiz nuk është i disponueshëm, mund të shfaqim një mesazh gabimi ose të drejtojmë përdoruesin diku tjetër
+     return <Text style={styles.errorText}>Quiz data is missing!</Text>;
+   }
+
 
   // Marrim progresin aktual të përdoruesit dhe funksionin për ta ruajtur atë
   const { progress, saveProgress } = useProgress(); 
@@ -12,7 +22,7 @@ export default function QuizScreen({ route, navigation }) {
   const [score, setScore] = useState(0);                      //për të mbajtur rezultatin e kuizit
   const [showResults, setShowResults] = useState(false);     //për të treguar rezultatet pasi përfundon kuizi
 
-  // Funksioni që trajton përgjigjet e përdoruesit
+    // Funksioni që trajton përgjigjet e përdoruesit
   const handleAnswer = (index) => {
     if (!showResults) {
       // Kontrollon nëse përgjigja është e saktë
@@ -23,7 +33,7 @@ export default function QuizScreen({ route, navigation }) {
       if (currentQuestion < quiz.questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
-        // Nëse është pyetja e fundit, tregon rezultatet dhe ruan progresin
+         // Nëse është pyetja e fundit, tregon rezultatet dhe ruan progresin
         setShowResults(true);
 
         // Ruajmë progresin e përdoruesit me rezultatet e kuizit
@@ -38,15 +48,16 @@ export default function QuizScreen({ route, navigation }) {
             [quiz.id]: score + (isCorrect ? 1 : 0), // ruajmë pikët për këtë quiz
           },
         };
-        saveProgress(newProgress); // Përdorim funksionin për të ruajtur progresin e përdoruesit
+        saveProgress(newProgress);
       }
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* Titulli i kuizit */}
+          {/* Titulli i kuizit */}
       <Text style={styles.title}>{quiz.title}</Text>
+
 
       {/* Nëse kuizi ka përfunduar, shfaq rezultatet */}
       {showResults ? (
@@ -64,11 +75,13 @@ export default function QuizScreen({ route, navigation }) {
           </TouchableOpacity>
         </View>
       ) : (
+
         // Nëse kuizi është ende duke u zhvilluar, shfaq pyetjen aktuale
         <View style={styles.questionContainer}>
           <Text style={styles.questionNumber}>
             Question {currentQuestion + 1}/{quiz.questions.length}
           </Text>
+
 
           {/* Teksti i pyetjes aktuale */}
           <Text style={styles.questionText}>
@@ -92,6 +105,13 @@ export default function QuizScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  errorText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 20,
+  },
   container: {
     flex: 1,
     backgroundColor: '#F9F9F9',  // Ndryshim i sfondit për më shumë ngjyrë

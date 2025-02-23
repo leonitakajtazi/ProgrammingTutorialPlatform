@@ -3,10 +3,10 @@ import { Ionicons } from '@expo/vector-icons';
 
 // Lista e përmbajtjeve të veçuara që do të shfaqen në ekranin kryesor
 const featuredContent = [
-  { id: '1', title: 'JavaScript Basics', icon: 'logo-javascript' },
-  { id: '2', title: 'HTML', icon: 'logo-html5' },
-  { id: '3', title: 'CSS', icon: 'logo-css3' },
-  { id: '4', title: 'React Native', icon: 'logo-react' },
+  { id: '1', title: 'JavaScript Basics', icon: 'logo-javascript', description: 'Learn the fundamentals of JavaScript programming.' },
+  { id: '2', title: 'HTML', icon: 'logo-html5', description: 'Understand the structure of web pages with HTML.' },
+  { id: '3', title: 'CSS', icon: 'logo-css3', description: 'Style web pages and make them visually appealing with CSS.' },
+  { id: '4', title: 'React Native', icon: 'logo-react', description: 'Build cross-platform mobile apps using React Native.' },
 ];
 
 export default function HomeScreen({ navigation }) {
@@ -24,27 +24,27 @@ export default function HomeScreen({ navigation }) {
       <Text style={styles.sectionTitle}>🔥 Learning Materials</Text>
 
       <FlatList
-  data={featuredContent} // Merr të dhënat nga array `featuredContent`
-  keyExtractor={(item) => item.id} // Çdo element duhet të ketë një ID unike
-  renderItem={({ item }) => (
-    <TouchableOpacity
-      style={styles.item} // Stili për çdo element të listës
-      onPress={() => {
-        // Nuk ka asnjë veprim navigimi
-        console.log('Item clicked: ', item.title); // Mund të shtoni ndonjë veprim tjetër këtu, si logim për testim
-      }}
-    >
-      {/* Ikona për secilin kurs */}
-      <Ionicons name={item.icon} size={30} color="#4682B4" style={styles.icon} />
-      <View style={styles.textContainer}>
-        {/* Teksti për titullin dhe përshkrimin e shkurtër */}
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemSubtitle}>Tap to learn more!</Text>
-      </View>
-    </TouchableOpacity>
-  )}
-/>
-
+        data={featuredContent} // Merr të dhënat nga array `featuredContent`
+        keyExtractor={(item) => item.id} // Çdo element duhet të ketë një ID unike
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.item} // Stili për çdo element të listës
+            onPress={() => {
+              // Nuk ka asnjë veprim navigimi
+              console.log('Item clicked: ', item.title); // Mund të shtoni ndonjë veprim tjetër këtu, si logim për testim
+            }}
+          >
+            {/* Ikona për secilin kurs */}
+            <Ionicons name={item.icon} size={30} color="#4682B4" style={styles.icon} />
+            <View style={styles.textContainer}>
+              {/* Teksti për titullin */}
+              <Text style={styles.itemTitle}>{item.title}</Text>
+              {/* Përshkrimi i shkurtër për secilin kurs */}
+              <Text style={styles.itemSubtitle}>{item.description}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 }
